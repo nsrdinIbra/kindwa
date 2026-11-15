@@ -1,0 +1,369 @@
+:root {
+    --primary-color: #85581A;      /* لون ترابي داكن وأنيق للعناوين والأزرار */
+    --primary-light: #A47551;      /* لون ترابي متوسط */
+    --accent-color: #b45309;       /* ذهبي دافئ */
+    /* لون ترابي فاتح شفاف جداً لكي تظهر الصورة بوضوح من خلفه */
+    --card-bg: rgba(244, 238, 224, 0.45);  
+    --text-main: #231c17;          /* نص أساسي غامق لضمان القراءة الواضحة */
+    --text-muted: #4a3b32;         /* نص ثانوي ترابي */
+    --border-color: rgba(133, 88, 26, 0.25);
+    --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.15);
+    --shadow-md: 0 12px 35px rgba(0, 0, 0, 0.25);
+    --radius: 14px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Tajawal', sans-serif;
+}
+
+/* تنسيق الخلفية الديناميكية لصفحة الموقع مع تظليل خفيف لكي يظهر جمال الصور */
+body {
+    background-color: #1e293b;
+    color: var(--text-main);
+    line-height: 1.7;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-image: linear-gradient(rgba(30, 24, 20, 0.35), rgba(30, 24, 20, 0.45)), url('gn.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    transition: background-image 0.5s ease-in-out;
+}
+
+/* خلفيات الأقسام المتغيرة مع تظليل خفيف جداً */
+body.bg-home {
+    background-image: linear-gradient(rgba(30, 24, 20, 0.35), rgba(30, 24, 20, 0.45)), url('gn.png');
+}
+
+body.bg-hillat-ahmed {
+    background-image: linear-gradient(rgba(30, 24, 20, 0.35), rgba(30, 24, 20, 0.45)), url('ha.png');
+}
+
+body.bg-um-zoghi {
+    background-image: linear-gradient(rgba(30, 24, 20, 0.35), rgba(30, 24, 20, 0.45)), url('omz.png');
+}
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* شريط التنقل (شفاف وداعم للوضوح) */
+.navbar {
+    background-color: rgba(244, 238, 224, 0.55);
+    box-shadow: var(--shadow-sm);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 3px solid var(--primary-color);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-icon {
+    font-size: 1.8rem;
+}
+
+.logo h1 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--primary-color);
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+}
+
+/* أزرار التنقل الثلاثة */
+.nav-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.nav-btn {
+    background-color: rgba(255, 255, 255, 0.3);
+    color: var(--text-main);
+    border: 2px solid transparent;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.nav-btn:hover {
+    background-color: rgba(133, 88, 26, 0.2);
+    color: var(--primary-color);
+}
+
+.nav-btn.active {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    box-shadow: 0 4px 15px rgba(133, 88, 26, 0.4);
+}
+
+/* المحتوى الرئيسي */
+.main-content {
+    flex: 1;
+    padding: 40px 0;
+}
+
+.content-section {
+    display: none;
+    animation: fadeIn 0.45s ease forwards;
+}
+
+.content-section.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* البطاقة الترحيبية في الرئيسية (شفافة وأنيقة) */
+.hero-card {
+    background: linear-gradient(135deg, rgba(133, 88, 26, 0.75), rgba(164, 117, 81, 0.75));
+    color: #ffffff;
+    padding: 45px 35px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+    margin-bottom: 35px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.badge {
+    display: inline-block;
+    background-color: rgba(255, 255, 255, 0.3);
+    color: #ffffff;
+    padding: 5px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.section-header .badge {
+    background-color: rgba(133, 88, 26, 0.2);
+    color: var(--primary-color);
+}
+
+.hero-card h2 {
+    font-size: 2.1rem;
+    font-weight: 800;
+    margin-bottom: 15px;
+}
+
+.hero-card p {
+    max-width: 720px;
+    margin: 0 auto 25px;
+    font-size: 1.1rem;
+    opacity: 0.95;
+}
+
+.quick-links {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.action-btn {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.action-btn:hover {
+    background-color: #634113;
+    transform: translateY(-2px);
+}
+
+.action-btn.secondary {
+    background-color: rgba(255, 255, 255, 0.75);
+    color: var(--primary-color);
+    backdrop-filter: blur(5px);
+}
+
+.action-btn.secondary:hover {
+    background-color: rgba(255, 255, 255, 0.95);
+}
+
+/* شبكة البطاقات */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.info-card {
+    background-color: var(--card-bg);
+    padding: 28px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+    background-color: rgba(244, 238, 224, 0.6);
+}
+
+.card-icon {
+    font-size: 2.2rem;
+    margin-bottom: 12px;
+}
+
+.info-card h3 {
+    color: var(--primary-color);
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+}
+
+.info-card p {
+    color: var(--text-muted);
+    font-size: 0.98rem;
+}
+
+/* الأقسام الفرعية */
+.section-header {
+    text-align: center;
+    margin-bottom: 30px;
+    background-color: var(--card-bg);
+    padding: 20px;
+    border-radius: var(--radius);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--border-color);
+}
+
+.section-header h2 {
+    font-size: 2rem;
+    color: var(--primary-color);
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.section-header p {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+}
+
+.detail-box {
+    background-color: var(--card-bg);
+    padding: 35px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.detail-box h3 {
+    color: var(--primary-color);
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 10px;
+}
+
+.detail-box > p {
+    font-size: 1.08rem;
+    margin-bottom: 25px;
+    color: var(--text-main);
+}
+
+.features-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.feature-item {
+    background-color: rgba(255, 255, 255, 0.45);
+    padding: 16px 20px;
+    border-radius: 10px;
+    border-right: 4px solid var(--primary-color);
+    font-size: 1rem;
+    backdrop-filter: blur(5px);
+}
+
+/* التذييل */
+.footer {
+    background-color: var(--card-bg);
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+    padding: 20px 0;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* التجاوب مع الشاشات الصغيرة */
+@media (max-width: 680px) {
+    .nav-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .nav-buttons {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .nav-btn {
+        padding: 8px 14px;
+        font-size: 0.92rem;
+    }
+
+    .hero-card {
+        padding: 30px 20px;
+    }
+
+    .hero-card h2 {
+        font-size: 1.6rem;
+    }
+}

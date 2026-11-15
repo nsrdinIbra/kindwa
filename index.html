@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بوابة منطقة كندوة</title>
+    <!-- استدعاء خط Tajawal من Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <!-- ربط ملف التنسيق الخارجي -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-home">
+
+    <!-- شريط التنقل العلوي -->
+    <header class="navbar">
+        <div class="container nav-container">
+            <div class="logo">
+                <span class="logo-icon">🌿</span>
+                <h1>منطقة كندوة</h1>
+            </div>
+            
+            <nav class="nav-buttons">
+                <button class="nav-btn active" data-target="home">الرئيسية</button>
+                <button class="nav-btn" data-target="hillat-ahmed">كندوة حلة أحمد</button>
+                <button class="nav-btn" data-target="um-zoghi">كندوة أم زوغي</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- المحتوى الرئيسي -->
+    <main class="container main-content">
+        
+        <!-- قسم: الرئيسية -->
+        <section id="home" class="content-section active">
+            <div class="hero-card">
+                <div class="badge">مرحباً بكم في</div>
+                <h2>بوابة منطقة كندوة التعريفية</h2>
+                <p>
+                    تُعد منطقة كندوة من المناطق العريقة ذات التاريخ الاجتماعي والتراثي الغني، حيث تجمع بين أصالة الماضي وحيوية الحاضر، وتتميز بترابط أهلها وكرم ضيافتهم وطبيعتها الخلابة.
+                </p>
+                <div class="quick-links">
+                    <button class="action-btn" onclick="switchTab('hillat-ahmed')">استكشف كندوة حلة أحمد ←</button>
+                    <button class="action-btn secondary" onclick="switchTab('um-zoghi')">استكشف كندوة أم زوغي ←</button>
+                </div>
+            </div>
+
+            <div class="cards-grid">
+                <div class="info-card">
+                    <div class="card-icon">📍</div>
+                    <h3>الموقع والطبيعة</h3>
+                    <p>تتميز المنطقة بموقع استراتيجي وبيئة زراعية واجتماعية متكاملة تخدم سكانها والمناطق المجاورة.</p>
+                </div>
+                <div class="info-card">
+                    <div class="card-icon">🤝</div>
+                    <h3>النسيج الاجتماعي</h3>
+                    <p>مجتمع متماسك يقوم على التكافل والتعاون والمشاركة الفاعلة في كافة المناسبات والمبادرات.</p>
+                </div>
+                <div class="info-card">
+                    <div class="card-icon">🏛️</div>
+                    <h3>التراث والتاريخ</h3>
+                    <p>إرث تاريخي ممتد عبر الأجيال يعكس ثقافة المنطقة وعاداتها الأصيلة في الترحيب والإكرام.</p>
+                </div>
+            </div>
+
+            <!-- قسم المقالات في الرئيسية -->
+            <div class="home-articles">
+                <div class="articles-header">
+                    <h3>📖 مقالات وتدوينات من كندوة</h3>
+                </div>
+
+                <article class="article-card">
+                    <div class="article-meta">
+                        <span class="article-tag">تاريخ وتراث</span>
+                        <span class="article-date">15 نوفمبر 2026</span>
+                    </div>
+                    <h4>أشجار النيم وتاريخ المجالس الاجتماعية في منطقة كندوة</h4>
+                    <p>
+                        تُشكل شجرة النيم في منطقة كندوة أكثر من مجرد ظلٍّ وارف؛ فهي ملتقى للأهالي ورمز للكرم والتآخي، حيث تُعقد تحت ظلالها جلسات السمر وتُناقش قضايا المجتمع بروح الود والتكافل التي توارثتها الأجيال.
+                    </p>
+                    <p>
+                        يمتد تاريخ المنطقة ليربط بين عراقة الماضي وتطلعات الحاضر، حيث يسهم الشباب والشيوخ معاً في الحفاظ على هذا الإرث الاجتماعي وتطوير الخدمات في حلة أحمد وأم زوغي.
+                    </p>
+                </article>
+            </div>
+        </section>
+
+        <!-- قسم: كندوة حلة أحمد -->
+        <section id="hillat-ahmed" class="content-section">
+            <div class="section-header">
+                <span class="badge">القسم الأول</span>
+                <h2>كندوة حلة أحمد</h2>
+                <p>نبذة تعريفية شاملة حول معالم، تاريخ، وخدمات كندوة حلة أحمد.</p>
+            </div>
+
+            <div class="detail-box">
+                <h3>عن كندوة حلة أحمد</h3>
+                <p>
+                    تُشكل <strong>كندوة حلة أحمد</strong> ركناً أساسياً من أركان المنطقة، وتشتهر بتاريخها العريق ومؤسساتها المجتمعية والخدمية التي تلبي احتياجات الأهالي، إضافة إلى دورها البارز في الأنشطة الثقافية والاجتماعية.
+                </p>
+                
+                <div class="features-list">
+                    <div class="feature-item">
+                        <strong>🏫 التعليم والخدمات:</strong> توفر مرافق تعليمية وخدمية تخدم أبناء الحي والقرى المجاورة.
+                    </div>
+                    <div class="feature-item">
+                        <strong>🕌 المساجد:</strong> تضم مساجد عامرة تقام فيها الصلوات والجمع والجماعات وتجمع أهل الحي.
+                    </div>
+                    <div class="feature-item">
+                        <strong>🌱 النشاط الاقتصادي:</strong> يعتمد السكان على الزراعة والتجارة المحلية والمهن الحرة بروح تعاونية عالية.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم: كندوة أم زوغي -->
+        <section id="um-zoghi" class="content-section">
+            <div class="section-header">
+                <span class="badge">القسم الثاني</span>
+                <h2>كندوة أم زوغي</h2>
+                <p>نبذة تعريفية شاملة حول معالم، تاريخ، وخدمات كندوة أم زوغي.</p>
+            </div>
+
+            <div class="detail-box">
+                <h3>عن كندوة أم زوغي</h3>
+                <p>
+                    تتميز <strong>كندوة أم زوغي</strong> بطابعها التراثي الأصيل وحيويتها الاجتماعية، حيث تمثل نموذجاً للتعايش والتكاتف بين الأجيال، وتحتضن العديد من المعالم والمرافق التي تخدم المجتمع المحلي.
+                </p>
+                
+                <div class="features-list">
+                    <div class="feature-item">
+                        <strong>🌳 البيئة والزراعة:</strong> أراضٍ زراعية خصبة وطبيعة هادئة تعكس جمال الريف السوداني الأصيل.
+                    </div>
+                    <div class="feature-item">
+                        <strong>🤲 التكافل الاجتماعي:</strong> روابط أسرية ومجتمعية وثيقة تظهر في النفير والمناسبات العامة.
+                    </div>
+                    <div class="feature-item">
+                        <strong>📚 الثقافة والشباب:</strong> حراك ثقافي ورياضي شبابي يسهم في نهضة المنطقة وتطويرها.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- تذييل الصفحة -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2026 بوابة منطقة كندوة التعريفية - جميع الحقوق محفوظة</p>
+        </div>
+    </footer>
+
+    <!-- ربط ملف الجافاسكريبت الخارجي -->
+    <script src="kn.js"></script>
+</body>
+</html>
