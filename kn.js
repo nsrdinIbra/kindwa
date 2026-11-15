@@ -108,10 +108,10 @@ function loadArticles() {
                     `;
                 }
 
-                // قسم التعليقات (Disqus)
+                // قسم التعليقات (Disqus) - تمرير الـ ID وعنوان المقال
                 let disqusHtml = `
                     <div class="comments-section" style="margin-top: 30px; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 20px;">
-                        <button class="toggle-comments-btn" onclick="toggleDisqus(this, 'disqus_thread_${article.id}')" style="background: var(--primary-color, #2c3e50); color: white; border: none; padding: 9px 18px; border-radius: 8px; cursor: pointer; font-family: 'Tajawal', sans-serif; font-size: 0.95rem; transition: background 0.3s;">
+                        <button class="toggle-comments-btn" onclick="toggleDisqus(this, 'disqus_thread_${article.id}', '${article.id}', '${encodeURIComponent(article.title)}')" style="background: var(--primary-color, #2c3e50); color: white; border: none; padding: 9px 18px; border-radius: 8px; cursor: pointer; font-family: 'Tajawal', sans-serif; font-size: 0.95rem; transition: background 0.3s;">
                             💬 عرض / إضافة تعليقات
                         </button>
                         <div id="disqus_thread_${article.id}" class="disqus-container" style="display: none; margin-top: 15px;"></div>
@@ -144,18 +144,26 @@ function loadArticles() {
 }
 
 /**
- * دالة لفتح وإغلاق صندوق تعليقات Disqus لكل مقال عند النقر على الزر
+ * دالة لفتح وإغلاق صندوق تعليقات Disqus لكل مقال بشكل مستقل وفريد
  */
-function toggleDisqus(button, containerId) {
+function toggleDisqus(button, containerId, articleId, articleTitle) {
     const container = document.getElementById(containerId);
     
     if (container.style.display === 'none' || container.style.display === '') {
         container.style.display = 'block';
         button.textContent = 'إخفاء التعليقات 🔼';
         
-        // التحقق مما إذا تم تحميل سكربت Disqus من قبل لتجنب تكراره
+        // التحقق مما إذا تم تحميل صندوق التعليقات لهذا المقال من قبل
         if (!container.hasChildNodes() || container.innerHTML.trim() === '') {
-            var disqus_shortname = 'balola'; // ⚠️ ضع هنا الـ Shortname الخاص بحسابك في Disqus
+            
+            // إعداد متغيرات Disqus الخاصة بهذا المقال تحديداً
+            window.disqus_config = function () {
+                this.page.url = window.location.href + '#article-' + articleId; // رابط فريد لكل مقال
+                this.page.identifier = 'kandowa_article_' + articleId; // معرف فريد للمقال
+                this.page.title = decodeURIComponent(articleTitle);
+            };
+
+            var disqus_shortname = 'balola'; // الـ Shortname الخاص بك
             
             var dsq = document.createElement('script'); 
             dsq.type = 'text/javascript'; 
