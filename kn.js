@@ -65,7 +65,7 @@ function switchTab(targetId) {
 }
 
 /**
- * دالة لجلب المقالات وعرضها مع دعم الصور المفردة ومعرض الصور المتعدد
+ * دالة لجلب المقالات وعرضها مع دعم الصور المفردة، معرض الصور، وتعليقات Disqus
  */
 function loadArticles() {
     const container = document.getElementById('articles-container');
@@ -82,7 +82,7 @@ function loadArticles() {
             container.innerHTML = ''; // تفريغ الحاوية أولاً
             
             articles.forEach(article => {
-                // التصحيح: استخدام map بالشكل الصحيح على مصفوفة الفقرات
+                // معالجة الفقرات
                 let paragraphsHtml = '';
                 if (article.paragraphs && Array.isArray(article.paragraphs)) {
                     paragraphsHtml = article.paragraphs.map(p => `<p>${p}</p>`).join('');
@@ -93,7 +93,7 @@ function loadArticles() {
                     ? `<div class="article-img-container"><img src="${article.image}" alt="${article.title}" class="article-img"></div>` 
                     : '';
 
-                // عرض معرض الصور المتعدد (إن وجد مثل صور مقال العيون)
+                // عرض معرض الصور المتعدد (إن وجد)
                 let galleryHtml = '';
                 if (article.images && Array.isArray(article.images) && article.images.length > 0) {
                     let imagesItems = article.images.map(img => `
@@ -108,6 +108,16 @@ function loadArticles() {
                     `;
                 }
 
+                // قسم التعليقات (Disqus)
+                let disqusHtml = `
+                    <div class="comments-section" style="margin-top: 30px; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 20px;">
+                        <button class="toggle-comments-btn" onclick="toggleDisqus(this, 'disqus_thread_${article.id}')" style="background: var(--primary-color, #2c3e50); color: white; border: none; padding: 9px 18px; border-radius: 8px; cursor: pointer; font-family: 'Tajawal', sans-serif; font-size: 0.95rem; transition: background 0.3s;">
+                            💬 عرض / إضافة تعليقات
+                        </button>
+                        <div id="disqus_thread_${article.id}" class="disqus-container" style="display: none; margin-top: 15px;"></div>
+                    </div>
+                `;
+
                 let articleElement = document.createElement('article');
                 articleElement.className = 'article-card';
                 articleElement.style.marginBottom = '25px';
@@ -121,6 +131,7 @@ function loadArticles() {
                     <h4>${article.title}</h4>
                     ${paragraphsHtml}
                     ${galleryHtml}
+                    ${disqusHtml}
                 `;
                 
                 container.appendChild(articleElement);
@@ -130,4 +141,30 @@ function loadArticles() {
             console.error('خطأ في جلب المقالات:', error);
             container.innerHTML = '<p style="text-align:center; color: var(--text-muted);">عذراً، تعذر تحميل المقالات حالياً.</p>';
         });
+}
+
+/**
+ * دالة لفتح وإغلاق صندوق تعليقات Disqus لكل مقال عند النقر على الزر
+ */
+function toggleDisqus(button, containerId) {
+    const container = document.getElementById(containerId);
+    
+    if (container.style.display === 'none' || container.style.display === '') {
+        container.style.display = 'block';
+        button.textContent = 'إخفاء التعليقات 🔼';
+        
+        // التحقق مما إذا تم تحميل سكربت Disqus من قبل لتجنب تكراره
+        if (!container.hasChildNodes() || container.innerHTML.trim() === '') {
+            var disqus_shortname = 'balola'; // ⚠️ ضع هنا الـ Shortname الخاص بحسابك في Disqus
+            
+            var dsq = document.createElement('script'); 
+            dsq.type = 'text/javascript'; 
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }
+    } else {
+        container.style.display = 'none';
+        button.textContent = '💬 عرض / إضافة تعليقات 🔽';
+    }
 }
