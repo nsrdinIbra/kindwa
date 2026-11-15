@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.classList.add('bg-home');
     }
 
-    // استدعاء دالة جلب وعرض المقالات فور تحميل الصفحة
+    // جلب وعرض المقالات من ملف JSON فور تحميل الصفحة
     loadArticles();
 });
 
@@ -65,7 +65,7 @@ function switchTab(targetId) {
 }
 
 /**
- * دالة لجلب المقالات من ملف articles.json وعرضها ديناميكياً
+ * دالة لجلب المقالات وعرضها مع دعم الصور المفردة ومعرض الصور المتعدد
  */
 function loadArticles() {
     const container = document.getElementById('articles-container');
@@ -82,27 +82,28 @@ function loadArticles() {
             container.innerHTML = ''; // تفريغ الحاوية أولاً
             
             articles.forEach(article => {
-                let paragraphsHtml = article.paragraphs.p(p => `<p>${p}</p>`.replace(/^/, '')).join(''); // تم تصحيح بناء الفقرات
-                
-                // إعادة صياغة توليد الفقرات بشكل آمن وبسيط
-                let paragraphsList = article.paragraphs.map(p => `<p>${p}</p>`).join('');
+                // التصحيح: استخدام map بالشكل الصحيح على مصفوفة الفقرات
+                let paragraphsHtml = '';
+                if (article.paragraphs && Array.isArray(article.paragraphs)) {
+                    paragraphsHtml = article.paragraphs.map(p => `<p>${p}</p>`).join('');
+                }
 
-                // إذا كان المقال يحتوي على صورة رئيسية واحدة
+                // عرض الصورة الرئيسية الفردية (إن وجدت)
                 let singleImageHtml = article.image 
                     ? `<div class="article-img-container"><img src="${article.image}" alt="${article.title}" class="article-img"></div>` 
                     : '';
 
-                // إذا كان المقال يحتوي على معرض صور متعدد (مثل مقال العيون)
+                // عرض معرض الصور المتعدد (إن وجد مثل صور مقال العيون)
                 let galleryHtml = '';
-                if (article.images && article.images.length > 0) {
+                if (article.images && Array.isArray(article.images) && article.images.length > 0) {
                     let imagesItems = article.images.map(img => `
                         <div class="gallery-item">
-                            <img src="${img}" alt="صورة من المخيم الصحي" class="article-img">
+                            <img src="${img}" alt="صورة من الأرشيف" class="article-img">
                         </div>
                     `).join('');
                     
                     galleryHtml = `
-                        <div class="article-gallery-title" style="margin-top: 20px; margin-bottom: 10px; font-weight: 700; color: var(--primary-color);">📷 صور من اليوم الصحي للعيون:</div>
+                        <div class="article-gallery-title" style="margin-top: 20px; margin-bottom: 10px; font-weight: 700; color: var(--primary-color);">📷 معرض الصور:</div>
                         <div class="article-gallery">${imagesItems}</div>
                     `;
                 }
@@ -114,11 +115,11 @@ function loadArticles() {
                 articleElement.innerHTML = `
                     ${singleImageHtml}
                     <div class="article-meta" style="margin-top: 15px;">
-                        <span class="article-tag">${article.tag}</span>
-                        <span class="article-date">${article.date}</span>
+                        <span class="article-tag">${article.tag || ''}</span>
+                        <span class="article-date">${article.date || ''}</span>
                     </div>
                     <h4>${article.title}</h4>
-                    ${paragraphsList}
+                    ${paragraphsHtml}
                     ${galleryHtml}
                 `;
                 
